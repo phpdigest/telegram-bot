@@ -2,27 +2,24 @@
 
 declare(strict_types=1);
 
-use App\ApplicationParameters;
-use App\ViewRenderer;
-use Yiisoft\Validator\ValidatorFactory;
-use Yiisoft\Validator\ValidatorFactoryInterface;
-
 /* @var array $params */
 
-return [
-    ApplicationParameters::class => static function () use ($params) {
-        return (new ApplicationParameters())
-            ->csrfAttribute($params['app']['csrfAttribute'])
-            ->charset($params['app']['charset'])
-            ->language($params['app']['language'])
-            ->name($params['app']['name']);
-    },
+use App\Adapter\BotManCacheAdapter;
+use BotMan\BotMan\BotMan;
+use BotMan\BotMan\BotManFactory;
+use BotMan\BotMan\Drivers\DriverManager;
+use BotMan\Drivers\Telegram\TelegramDriver;
 
-    ValidatorFactoryInterface::class => ValidatorFactory::class,
-    ViewRenderer::class => [
-        '__construct()' => [
-            'viewBasePath' => '@views',
-            'layout' => '@resources/layout/main',
-        ],
-    ],
+return [
+    BotMan::class => static function ($container) use ($params) {
+        $config = [
+            'telegram' => [
+                'token' => $params['telegram-bot']['token'],
+            ],
+        ];
+
+        DriverManager::loadDriver(TelegramDriver::class);
+
+        return BotManFactory::create($config, $container->get(BotManCacheAdapter::class));
+    },
 ];

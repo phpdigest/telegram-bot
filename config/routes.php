@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-use App\Controller\SiteController;
+use App\Controller\MainAction;
 use Yiisoft\Router\Route;
 
 return [
-    Route::get('/', [SiteController::class, 'index'])->name('site/index'),
+    Route::post('/', [MainAction::class, '__invoke'])->name('site/index'),
 ];

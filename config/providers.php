@@ -5,12 +5,12 @@ declare(strict_types=1);
 /* @var array $params */
 
 use App\Provider\CacheProvider;
-use App\Provider\EventDispatcherProvider;
 use App\Provider\FileRotatorProvider;
 use App\Provider\FileTargetProvider;
 use App\Provider\LoggerProvider;
 use App\Provider\RouterProvider;
 use Yiisoft\Arrays\Modifier\ReverseBlockMerge;
+use Yiisoft\Yii\Event\EventDispatcherProvider;
 
 return [
     'yiisoft/router-fastroute/router' => RouterProvider::class,
@@ -37,6 +37,12 @@ return [
         ],
     ],
     'yiisoft/log/logger' =>  LoggerProvider::class,
+    'yiisoft/event-dispatcher/eventdispatcher' => [
+        '__class' => EventDispatcherProvider::class,
+        '__construct()' => [
+            []
+        ],
+    ],
 
     ReverseBlockMerge::class => new ReverseBlockMerge()
 ];

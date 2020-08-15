@@ -11,10 +11,6 @@ use Psr\Http\Message\ServerRequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UploadedFileFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
-use Yiisoft\DataResponse\DataResponseFactory;
-use Yiisoft\DataResponse\DataResponseFactoryInterface;
-use Yiisoft\DataResponse\DataResponseFormatterInterface;
-use Yiisoft\DataResponse\Formatter\HtmlDataResponseFormatter;
 use Yiisoft\Di\Container;
 use Yiisoft\Di\Support\ServiceProvider;
 
@@ -31,7 +27,5 @@ final class Psr17Provider extends ServiceProvider
         $container->set(StreamFactoryInterface::class, Psr17Factory::class);
         $container->set(UriFactoryInterface::class, Psr17Factory::class);
         $container->set(UploadedFileFactoryInterface::class, Psr17Factory::class);
-        $container->set(DataResponseFormatterInterface::class, HtmlDataResponseFormatter::class);
-        $container->set(DataResponseFactoryInterface::class, DataResponseFactory::class);
     }
 }
