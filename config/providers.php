@@ -7,6 +7,7 @@ declare(strict_types=1);
 use App\Provider\CacheProvider;
 use App\Provider\FileRotatorProvider;
 use App\Provider\FileTargetProvider;
+use App\Provider\HttpClientProvider;
 use App\Provider\LoggerProvider;
 use App\Provider\RouterProvider;
 use Yiisoft\Arrays\Modifier\ReverseBlockMerge;
@@ -14,7 +15,7 @@ use Yiisoft\Yii\Event\EventDispatcherProvider;
 
 return [
     'yiisoft/router-fastroute/router' => RouterProvider::class,
-    'yiisoft/cache/cache' =>  [
+    'yiisoft/cache/cache' => [
         '__class' => CacheProvider::class,
         '__construct()' => [
             $params['yiisoft/cache-file']['file-cache']['path'],
@@ -26,23 +27,23 @@ return [
             $params['yiisoft/log-target-file']['file-rotator']['maxfilesize'],
             $params['yiisoft/log-target-file']['file-rotator']['maxfiles'],
             $params['yiisoft/log-target-file']['file-rotator']['filemode'],
-            $params['yiisoft/log-target-file']['file-rotator']['rotatebycopy']
+            $params['yiisoft/log-target-file']['file-rotator']['rotatebycopy'],
         ],
     ],
     'yiisoft/log-target-file/filetarget' => [
         '__class' => FileTargetProvider::class,
         '__construct()' => [
             $params['yiisoft/log-target-file']['file-target']['file'],
-            $params['yiisoft/log-target-file']['file-target']['levels']
+            $params['yiisoft/log-target-file']['file-target']['levels'],
         ],
     ],
-    'yiisoft/log/logger' =>  LoggerProvider::class,
+    'yiisoft/log/logger' => LoggerProvider::class,
     'yiisoft/event-dispatcher/eventdispatcher' => [
         '__class' => EventDispatcherProvider::class,
         '__construct()' => [
-            []
+            [],
         ],
     ],
 
-    ReverseBlockMerge::class => new ReverseBlockMerge()
+    ReverseBlockMerge::class => new ReverseBlockMerge(),
 ];
