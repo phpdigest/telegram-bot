@@ -21,7 +21,7 @@ final class SuggestLinkCommand implements CommandInterface
         return 'suggest_link';
     }
 
-    public function handle(BotMan $botMan)
+    public function handle(BotMan $botMan): void
     {
         $botMan->startConversation($this->suggestLinkConversation);
     }

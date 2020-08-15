@@ -53,6 +53,7 @@ return [
         'charset' => 'UTF-8',
         'language' => 'en',
         'name' => 'PHP Digest Telegram Bot',
+        'api_url' => '',
     ],
 
     'telegram-bot' => [

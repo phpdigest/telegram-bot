@@ -10,5 +10,5 @@ interface CommandInterface
 {
     public static function getName(): string;
 
-    public function handle(BotMan $botMan);
+    public function handle(BotMan $botMan): void;
 }
